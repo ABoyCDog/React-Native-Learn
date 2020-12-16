@@ -69,6 +69,99 @@ class SomethingFast extends Component {
 
 ## 搭建开发环境
 
+### 1、Window + Android
+
+- `安装依赖`
+
+  必须安装的依赖：Node、JDK 和 Android Studio
+
+  > 虽然你可以使用任何编辑器来开发应用（编写 js 代码），但你仍然必须安装 Android Studio 来获得编译 Android 应用所需的工具和环境。
+
+- `Node、JDK`
+
+  注意 Node 的版本应大于等于 12，而 JDK 的版本必须是 1.8（目前不支持 1.9 及更高版本，注意 1.8 版本官方也直接称 8 版本）。安装完 Node 后建议设置 npm 镜像（淘宝源）以加速后面的过程（或使用科学上网工具）。
+
+  > 注意：不要使用 cnpm！cnpm 安装的模块路径比较奇怪，packager 不能正常识别！
+
+  ```js
+  # 使用nrm工具切换淘宝源
+  npx nrm use taobao
+
+  # 如果之后需要切换回官方源可使用
+  npx nrm use npm
+  ```
+
+- `Android 开发环境`
+
+  - 1、安装 Android Studio
+
+    [官方链接](https://developer.android.com/studio)
+
+  - 2、安装 Android SDK
+
+    Android Studio 默认会安装最新版本的 Android SDK。目前编译 React Native 应用需要的是 Android 10 (Q)版本的 SDK（注意 SDK 版本不等于终端系统版本，RN 目前支持 android4.1 以上设备）。你可以在 Android Studio 的 SDK Manager 中选择安装各版本的 SDK。
+
+    > SDK Manager 还可以在 Android Studio 的"Preferences"菜单中找到。具体路径是 Appearance & Behavior → System Settings → Android SDK。
+
+  - 3、配置 ANDROID_HOME 环境变量
+
+    打开控制面板 -> 系统和安全 -> 系统 -> 高级系统设置 -> 高级 -> 环境变量 -> 新建，创建一个名为 ANDROID_HOME 的环境变量（系统或用户变量均可），指向你的 Android SDK 所在的目录（具体的路径请自行确认）
+
+    `SDK 默认是安装在下面的目录：`
+
+    > `c: \Users\你的用户名\AppData\Local\Android\Sdk;`
+
+    你可以在 Android Studio 的"Preferences"菜单中查看 SDK 的真实路径，具体是 Appearance & Behavior → System Settings → Android SDK。
+
+    你需要关闭现有的命令符提示窗口然后重新打开，这样新的环境变量才能生效。
+
+  - 4、把一些工具目录添加到环境变量 Path 中
+
+    打开控制面板 -> 系统和安全 -> 系统 -> 高级系统设置 -> 高级 -> 环境变量，选中 Path 变量，然后点击编辑。点击新建然后把这些工具目录路径添加进去：platform-tools、emulator、tools、tools/bin
+
+    ```js
+    %ANDROID_HOME%\platform-tools
+    %ANDROID_HOME%\emulator
+    %ANDROID_HOME%\tools
+    %ANDROID_HOME%\tools\bin
+    ```
+
+- `准备Android设备`
+
+  `可以使用模拟器，也可以使用真机`
+
+  - 使用 Android 真机
+
+    使用 USB 数据线连接电脑，然后选择数据传输模式-允许所有操作
+
+  - 使用 Android 模拟器
+
+    打开 Android Studio，'Tool->AVD Manager'，新建你的虚拟设备
+
+- `创建新项目`
+
+  ```js
+  // 注意，这里的npx是使用nrm工具切换淘宝源
+  npx nrm use taobao
+  // 如果之后需要切换回官方源可使用
+  npx nrm use npm
+
+  npx react-native init AwesomeProject
+  ```
+
+- `编译并运行你的 React Native 应用`
+
+  确保你先运行了模拟器或者连接了真机，然后在你的项目目录中运行 yarn android 或者 yarn react-native run-android：
+
+  ```js
+  cd yourProject
+  yarn android
+  # 或者
+  yarn react-native run-android
+  ```
+
+- `跑起来咯，开心咩~`
+
 ## 核心组件与原生组件
 
 ### 1、原生组件
